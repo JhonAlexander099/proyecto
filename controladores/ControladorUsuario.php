@@ -1,36 +1,40 @@
 <?php
 
 namespace controladores;
-
 use clases\Usuario;
-
+include_once "config/autoload.php";
 class ControladorUsuario
 {
-    public function login(int $correo, string $password): void
+    public function login(String $user, string $pass)
     {
         $usuario = new Usuario();
-        $usuario ->getCorreo($correo);
-        $query = $usuario->mostrarPorCorreo();
-        if ($query->rowCount() != 1) {
-            echo "Usuario y/o Contraseña incorrecto";
-        } else {
-            $datos = $query->fetchAll();
-            foreach ($datos as $user) {
-                $passwordBD = $user["contraseña"];
-                $nombres = $user["nombres"];
-                $tipo = $user["tipo"];
-
+        $datos = $usuario->datos_login($user);
+        if($datos!=null){
+            $passbd = null;
+            foreach ($datos as $datosbd){
+                $passbd = $datosbd["contraseña"];
             }
-            if (password_verify($password, $passwordBD)) {
+            if(password_verify($pass, $passbd)){
                 session_start();
-                $_SESSION["nombre"] = $nombres;
-                $_SESSION["tipo"] = $tipo;
-                $_SESSION["estado"] = "ok";
-                header("Location: index.php?bienvenido");
-            } else {
-                echo "Usuario y/o Contraseña incorrecto";
+                $_SESSION["autenticado"] = 1;
+                header( "location: index.php?bienvenido");
+                 
+            }else{    
+                echo "usuario o password no encontrados";           
             }
+        }else{
+            echo "usuario o password no encontrados";
         }
     }
 
+    public function guardar(String $user, String $pass)
+    {
+        $usuario = new Usuario();
+        $usuario->setCodigo($user);
+        $usuario->setPassword(password_hash($pass, PASSWORD_DEFAULT)); /*aca marca error linea 31*/
+        $usuario->guardar();
+        return "Usuario Guardado";
+    }
 }
+
+

@@ -5,9 +5,9 @@ include_once "config/autoload.php";
 
 class Usuario{
     private $id;
-    private $nombres;
+    private $nombre;
     private $correo;
-    private $password;
+    private $contraseña;
     private $tipo;
 
 
@@ -33,28 +33,28 @@ class Usuario{
         return $this;
     }
 
-    public function getPassword()
+    public function getContraseña()
     {
-        return $this->password;
+        return $this->contraseña;
     }
 
 
-    public function setPassword($password)
+    public function setContraseña($contraseña)
     {
-        $this->password= $password;
+        $this->contraseña= $contraseña;
         return $this;
     }
 
 
-    public function getNombres()
+    public function getNombre()
     {
-        return $this->nombres;
+        return $this->nombre;
     }
 
 
-    public function setNombres($nombres)
+    public function setNombre($nombre)
     {
-        $this->nombres = $nombres;
+        $this->nombre = $nombre;
         return $this;
     }
 
@@ -69,7 +69,25 @@ class Usuario{
         return $this;
     }
 
-    public function mostrarPorCorreo(){
+    /*public function mostrarPorCorreo(){
         return $this ->correo;
+    }*/
+
+    
+public function actualizar(){
+    try{
+        $objConexion = new ConexionDB();
+        $conexion = $objConexion->abrir();
+        $query = "UPDATE usuario SET nombre='$this->nombre',correo='$this->correo',
+        contraseña='$this->contraseña',tipo='$this->tipo'
+        WHERE id=$this->id";
+        $resultado = $conexion->exec($query);
+        $objConexion->cerrar();
+    }catch (\PDOException $e){
+        echo "Error: ".$e->getMessage();
+        exit();
     }
+    return $resultado;
+}
+
 }
