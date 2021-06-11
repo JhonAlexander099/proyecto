@@ -86,20 +86,20 @@ class Registro
 
     public function guardar(){
         try{
-            $objConexion = new ConexionDB();
-            $conexion = $objConexion->abrir();
-            $query = "INSERT INTO control(codigo,numDocPrueba,tipoPrueba,tipoPrueba,
+            $conexion = new ConexionDB();
+            $cnx = $conexion->getConexion();
+            $sql = "INSERT INTO control(codigo,numDocPrueba,tipoPrueba,tipoPrueba,
             medioTransporte,resultado,estadia)
             VALUES ('$this->codigo','$this->numDocPrueba','$this->tipoPrueba',
             '$this->medioTransporte','$this->resultado','$this->estadia')";
-            $resultado = $conexion->exec($query);
-            $objConexion->cerrar();
-        }catch (PDOException $e){
-            echo "Error: ".$e->getMessage();
-            exit();
+            $resultado = $cnx->exec($sql);
+            $conexion->cerrar();
+            return $resultado;
+        }catch (\PDOException $e){
+            echo $e->getMessage();
     }
-    return $resultado;
-    }
+   
+    }/*
     public function actualizar(){
         try{
             $objConexion = new ConexionDB();
@@ -115,7 +115,7 @@ class Registro
             exit();
         }
         return $resultado;
-    }
+    }*/
 }
 
 

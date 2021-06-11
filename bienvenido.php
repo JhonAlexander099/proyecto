@@ -15,14 +15,14 @@ echo "<nav class='navbar navbar-expand-lg navbar-light bg-light'>
             <div class='collapse navbar-collapse' id='navbarSupportedContent'>
               <ul class='navbar-nav me-auto mb-2 mb-lg-0'>";
 switch ($tipo) {
-    case "vendedor":
+    case "registrar":
         echo "<li class='nav-item'>
-                <a class='nav-link' href='#'>Registrar Ventas</a>
+                <a class='nav-link' href='#'>Registrar Policia</a>
              </li>";
         break;
-    case "dispensador":
+    case "asignar":
         echo "<li class='nav-item'>
-                <a class='nav-link' href='#'>Despachar Ventas</a>
+                <a class='nav-link' href='#'>Asignar Policia</a>
              </li>";
         break;
 }

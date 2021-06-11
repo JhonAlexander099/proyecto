@@ -86,31 +86,19 @@ class Persona
     public function guardar()
     {
       try{
-              $conexionDB = new Conexion();
-              $conn = $conexionDB->abrirConexion();
+              $conexion = new ConexionDB();
+              $cnx = $conexion->getConexion();
               $sql = "INSERT INTO persona(tipoDoc,documento,nombres,apellidos)
-                      VALUES(?,?,?,?)";
+                      VALUES('$this->tipoDoc','$this->documento','$this->nombres','$this->apellidos')";
   
-              $stmt = $conn->prepare($sql);
-              $stmt->bindParam(1, $this->tipoDoc, \PDO::PARAM_STR);
-              $stmt->bindParam(2, $this->dni, \PDO::PARAM_STR);
-              $stmt->bindParam(3, $this->nombres, \PDO::PARAM_STR);
-              $stmt->bindParam(4, $this->apellidos, \PDO::PARAM_STR);
-              $stmt->execute();
-              $filas = $stmt->rowCount();
-  
-              $conexionDB->cerrarConexion();
-              if ($filas!=0) {
-                return true;    
-              } else {
-                  return false;
-              }
-              
-          }catch(PDOException $e){
-              return $e->getMessage();
+              $resultado = $cnx->exec($sql);
+              $conexion->cerrar();
+             return $resultado;
+          }catch(\PDOException $e){
+              echo $e->getMessage();
           }
     }
-  
+  /*
     public function personaID()
       {
           try{
@@ -159,6 +147,6 @@ class Persona
               return $e->getMessage();
           }
    }
-  
+  */
 }
 
