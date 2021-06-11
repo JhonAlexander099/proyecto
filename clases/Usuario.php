@@ -74,8 +74,8 @@ class Usuario{
         try{
             $conexion = new ConexionBD();
             $cnx = $conexion->getConexion();
-            $sql = "INSERT INTO usuario(nombres, user, clave, tipo)
-                    VALUES('$this->nombres','$this->user','$this->clave','$this->tipo')";
+            $sql = "INSERT INTO usuario(nombres, correo, clave, tipo)
+                    VALUES('$this->nombres','$this->correo','$this->clave','$this->tipo')";
 
             $resultado = $cnx->exec($sql);
             $conexion->cerrar();

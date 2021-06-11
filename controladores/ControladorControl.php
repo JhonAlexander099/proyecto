@@ -1,9 +1,9 @@
 <?php
 
 namespace controladores;
-use clases\Registro;
+use clases\Control;
 include_once "config/autoload.php";
-class ControladorRegistro
+class ControladorControl
 {
     public function guardar(String $codigo, int $numDocPrueba, String $tipoPrueba, String $medioTransporte, 
                             String $resultado, String $estadia): String{

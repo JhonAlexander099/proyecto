@@ -3,7 +3,7 @@
 namespace clases;
 use config\ConexionBD;
 include_once "config/autoload.php";
-class Registro
+class Control
 {
     private $id;
     private $codigo;

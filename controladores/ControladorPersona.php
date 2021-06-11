@@ -1,9 +1,9 @@
 <?php
 
 namespace controladores;
-use clases\Individuo;
+use clases\Persona;
 include_once "config/autoload.php";
-class ControladorIndividuo
+class ControladorPersona
 {
     public function mostrar(){
         $individuos = new Individuo();
