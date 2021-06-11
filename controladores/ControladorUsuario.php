@@ -2,39 +2,29 @@
 
 namespace controladores;
 use clases\Usuario;
-include_once "config/autoload.php";
+require_once "config/autoload.php";
 class ControladorUsuario
 {
-    public function login(String $user, string $pass)
-    {
-        $usuario = new Usuario();
-        $datos = $usuario->datos_login($user);
-        if($datos!=null){
-            $passbd = null;
-            foreach ($datos as $datosbd){
-                $passbd = $datosbd["contraseña"];
-            }
-            if(password_verify($pass, $passbd)){
-                session_start();
-                $_SESSION["autenticado"] = 1;
-                header( "location: index.php?bienvenido");
-                 
-            }else{    
-                echo "usuario o password no encontrados";           
-            }
-        }else{
-            echo "usuario o password no encontrados";
-        }
-    }
+    public function login($username, $password){
+        $usuario = new Usuario($username, $password);
 
-    public function guardar(String $user, String $pass)
-    {
-        $usuario = new Usuario();
-        $usuario->setCodigo($user);
-        $usuario->setPassword(password_hash($pass, PASSWORD_DEFAULT)); /*aca marca error linea 31*/
-        $usuario->guardar();
-        return "Usuario Guardado";
-    }
+                session_start();
+                $_SESSION["usuario"] = $username;
+                
+                $_SESSION["tipo"] = "dispensador";
+                header("location: bienvenido.php");
+
 }
 
+    public function guardar($username, $password)
+    {
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $usuario = new Usuario($username, $password);
+        if ($usuario->crear() != 0) {
+            header("location: index.php?s");
+        } else {
+            header("location: usuarioCrear.php?s");
+        }
 
+    }   
+}

@@ -7,7 +7,7 @@ class Usuario{
     private $id;
     private $nombre;
     private $correo;
-    private $contraseña;
+    private $clave;
     private $tipo;
 
 
@@ -33,15 +33,15 @@ class Usuario{
         return $this;
     }
 
-    public function getContraseña()
+    public function getClave()
     {
-        return $this->contraseña;
+        return $this->clave;
     }
 
 
-    public function setContraseña($contraseña)
+    public function setClave($clave)
     {
-        $this->contraseña= $contraseña;
+        $this->clave= $clave;
         return $this;
     }
 
@@ -69,25 +69,56 @@ class Usuario{
         return $this;
     }
 
-    /*public function mostrarPorCorreo(){
-        return $this ->correo;
-    }*/
-
     
-public function actualizar(){
-    try{
-        $objConexion = new ConexionDB();
-        $conexion = $objConexion->abrir();
-        $query = "UPDATE usuario SET nombre='$this->nombre',correo='$this->correo',
-        contraseña='$this->contraseña',tipo='$this->tipo'
-        WHERE id=$this->id";
-        $resultado = $conexion->exec($query);
-        $objConexion->cerrar();
-    }catch (\PDOException $e){
-        echo "Error: ".$e->getMessage();
-        exit();
+    public function crear() {
+        try{
+            $conexion = new ConexionBD();
+            $cnx = $conexion->getConexion();
+            $sql = "INSERT INTO usuario(nombres, user, clave, tipo)
+                    VALUES('$this->nombres','$this->user','$this->clave','$this->tipo')";
+
+            $resultado = $cnx->exec($sql);
+            $conexion->cerrar();
+            return $resultado;
+        }catch(\PDOException $e){
+            echo $e->getMessage();
+        }
     }
-    return $resultado;
-}
+/*
+    public function mostrarPorUsuario()
+    {
+        try {
+            $conexionDB = new Conexion();
+            $conn = $conexionDB->abrirConexion();
+            $sql = "SELECT * FROM usuario WHERE user=? ";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $this->user, \PDO::PARAM_STR);
+
+            $stmt->execute();
+            //$resultado = $stmt->fetchAll();
+
+            $conexionDB->cerrarConexion();
+            
+            return $stmt;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+*/
+    public function existe(){
+        {
+            try {
+                $conexion = new ConexionBD();
+                $cnx = $conexion->getConexion();
+                $sql = "SELECT password FROM usuario WHERE nombres='$this->nombres';";
+                $resultado = $cnx->query($sql);
+                $conexion->cerrar();
+                return $resultado;
+            }catch (\PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+    }
 
 }
