@@ -1,6 +1,6 @@
 <?php
-include_once '../../config/ConexionBD.php'; 
-include_once '../clases/Control.php';
+include_once '../../includes/ConexionBD.php'; 
+include_once '../../app/clases/Control.php';
 
 $controlPrueba = new Control();
 

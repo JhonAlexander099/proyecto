@@ -1,8 +1,9 @@
 <?php
 
-namespace clases;
-use config\ConexionBD;
-include_once "config/autoload.php";
+namespace Clases;
+use includes\ConexionBD as Conexion;
+include_once "includes/autoload.php";
+
 class Control
 {
     private $codigo;
@@ -69,7 +70,6 @@ class Control
     {
         return $this->apellidos_paciente = $apellidos_paciente;
     }
-
 
 
     public function getCodigo()
@@ -211,7 +211,6 @@ class Control
                 );
             $stmt = $conn->prepare($sql);
             $stmt->execute($parameter);
-           
       
             $conexionDB->cerrarConexion();
           
@@ -221,6 +220,7 @@ class Control
             return $e->getMessage();
         }
     }
+ 
  
     public function obtenerDatosPacientePorDni() {
         try{

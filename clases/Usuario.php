@@ -1,12 +1,12 @@
 <?php
-namespace clases;
-use config\ConexionBD;
-include_once "config/autoload.php";
+namespace Clases;
+use includes\ConexionBD as Conexion;
+include_once "includes/autoload.php";
 
 class Usuario{
     private $id;
-    private $nombre;
-    private $correo;
+    private $nombres;
+    private $user;
     private $clave;
     private $tipo;
 
@@ -16,21 +16,20 @@ class Usuario{
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId(int $id)
     {
-        $this->id = $id;
-        return $this;
+       return $this->id = $id;
+         
     }
 
-    public function getCorreo($correo)
+    public function getUser()
     {
-        return $this->correo = $correo;
+        return $this->user;
     }
 
-    public function setCorreo($correo)
+    public function setUser(string $user)
     {
-        $this->correo = $correo;
-        return $this;
+       return $this->user = $user;
     }
 
     public function getClave()
@@ -39,23 +38,21 @@ class Usuario{
     }
 
 
-    public function setClave($clave)
+    public function setClave(string $clave)
     {
-        $this->clave= $clave;
-        return $this;
+       return $this->clave= $clave;
+        
     }
 
-
-    public function getNombre()
+    public function getNombres()
     {
-        return $this->nombre;
+        return $this->nombres;
     }
 
-
-    public function setNombre($nombre)
+    public function setNombres(string $nombres)
     {
-        $this->nombre = $nombre;
-        return $this;
+       return $this->nombres = $nombres;
+         
     }
 
     public function getTipo()
@@ -63,25 +60,34 @@ class Usuario{
         return $this->tipo;
     }
 
-    public function setTipo($tipo)
+    public function setTipo(int $tipo)
     {
-        $this->tipo = $tipo;
-        return $this;
+       return $this->tipo = $tipo;
+       
     }
 
-    
     public function crear() {
         try{
-            $conexion = new ConexionBD();
-            $cnx = $conexion->getConexion();
-            $sql = "INSERT INTO usuario(nombres, correo, clave, tipo)
-                    VALUES('$this->nombres','$this->correo','$this->clave','$this->tipo')";
+            $conexionDB = new Conexion();
+            $conn = $conexionDB->abrirConexion();
+            $sql = "INSERT INTO usuario(nombre, user, clave, tipo)
+                    VALUES(?, ?, ?, ?)";
 
-            $resultado = $cnx->exec($sql);
-            $conexion->cerrar();
-            return $resultado;
-        }catch(\PDOException $e){
-            echo $e->getMessage();
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $this->nombres, \PDO::PARAM_STR);
+            $stmt->bindParam(2, $this->user, \PDO::PARAM_STR);
+            $stmt->bindParam(3, $this->clave, \PDO::PARAM_STR);
+            $stmt->bindParam(4, $this->tipo, \PDO::PARAM_INT);
+            $stmt->execute();
+            $filas = $stmt->rowCount();
+            $conexionDB->cerrarConexion();
+            if ($filas!=0) {
+                return true;
+            } else {
+               return false;
+           }
+        }catch(PDOException $e){
+            return $e->getMessage();
         }
     }
 
@@ -104,5 +110,4 @@ class Usuario{
             return $e->getMessage();
         }
     }
-
 }

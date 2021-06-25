@@ -1,11 +1,11 @@
 <?php 
-use controladores\ControladorUsuario;
-use controladores\ControladorControl;
-use clases\Persona;
-use clases\Control;
-use clases\Historial; 
+use Controladores\ControladorUsuario;
+use Controladores\ControladorControl;
+use Clases\Persona;
+use Clases\Control;
+use Clases\Historial; 
 
-include_once "config/autoload.php";
+include_once "includes/autoload.php";
 session_start();
 $objUser = new ControladorUsuario();
 $objControl = new ControladorControl();
@@ -18,13 +18,13 @@ $accion = $_POST['accion'];
 
 
 switch ($accion) {
-
+	
     case 'HISTORIALCLINICO':
 
         $historial->setDniPaciente($_POST['dni']);
-       
-        $controlPrueba->setDniPaciente($_POST['dni']);
         
+        $controlPrueba->setDniPaciente($_POST['dni']);
+       
 
         $datosHistorialClinico = array("paciente" => $controlPrueba->obtenerDatosPacientePorDni(),
             "historialClinico" => $historial->getHistorialClinico());
@@ -32,6 +32,7 @@ switch ($accion) {
         echo json_encode($datosHistorialClinico);
 
         break;
+
 	case 'REGISTRAR':
 	  $nombre = $_POST['nombre'];
 	  $user = $_POST['user'];
@@ -86,7 +87,10 @@ switch ($accion) {
 		break;
 
 	default:
-		
+	
 		break;
 }
+
+
+
  ?>

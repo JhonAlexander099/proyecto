@@ -26,6 +26,27 @@
               <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Configuraciones</span>
             </a>
 					</li>
+<!--
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-invoice.html">
+              <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
+            </a>
+					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-blank.html">
+              <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
+            </a>
+					</li>
+					<li class="sidebar-item">
+						<a href="#auth" data-toggle="collapse" class="sidebar-link collapsed">
+              <i class="align-middle" data-feather="users"></i> <span class="align-middle">Auth</span>
+            </a>
+						<ul id="auth" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Sign In</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Sign Up</a></li>
+						</ul>
+					</li>
+ -->
 					<li class="sidebar-header">
 						Control covid
 					</li>
@@ -44,6 +65,17 @@
               <i class="align-middle" data-feather="list"></i> <span class="align-middle">Historial</span>
             </a>
 					</li>
+<!--
+					<li class="sidebar-item">
+						<a data-target="#forms" data-toggle="collapse" class="sidebar-link collapsed">
+              <i class="align-middle" data-feather="check-circle"></i> <span class="align-middle">Forms</span>
+            </a>
+						<ul id="forms" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+							<li class="sidebar-item"><a class="sidebar-link" href="forms-layouts.html">Form Layouts</a></li>
+							<li class="sidebar-item"><a class="sidebar-link" href="forms-basic-inputs.html">Basic Inputs</a></li>
+						</ul>
+					</li>
+-->
 					<li class="sidebar-item <?php if($request=='control-prueba'){ echo 'active'; }?>">
 						<a class="sidebar-link" href="control-prueba">
               <i class="align-middle" data-feather="list"></i> <span class="align-middle">Seguimiento</span>

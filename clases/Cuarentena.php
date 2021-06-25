@@ -1,8 +1,9 @@
 <?php
 
-namespace clases;
-use config\ConexionBD;
-include_once "config/autoload.php";
+namespace Clases;
+use includes\ConexionBD as Conexion;
+include_once "includes/autoload.php";
+
 class Cuarentena
 {
     private $fechaInicio;
@@ -114,5 +115,7 @@ class Cuarentena
         return $conn->query($sql);
 
     }
+
+
 
 }

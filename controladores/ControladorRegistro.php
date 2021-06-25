@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controladores;
+namespace Controladores;
 
 
 class ControladorRegistro

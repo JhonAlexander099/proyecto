@@ -1,5 +1,4 @@
 <?php
-
 include_once "vistas/layout/head.php";
 ?>
     </main>
@@ -36,6 +35,7 @@ include_once "vistas/layout/head.php";
                         <div class="box-header">
                             <h3 class="box-title">Tabla de cuarentena</h3>
                         </div>
+                      
                         <div class="box-body">
                             <input type="hidden" name="accion" value="CUARENTENA">
                             <table id="example2" class="table table-bordered table-hover">
@@ -51,7 +51,7 @@ include_once "vistas/layout/head.php";
 
                                 <?php
 
-                                $guardarCuarentena = new \clases\Cuarentena();
+                                $guardarCuarentena = new \App\Clases\Cuarentena();
                                 $result=$guardarCuarentena->mostrarCuarentena();
 
                                 foreach($result as $cuarentena){

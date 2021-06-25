@@ -1,7 +1,10 @@
 <?php
 
-namespace controladores;
+
+namespace Controladores;
+
+
 class ControladorPnp
 {
-    
+
 }

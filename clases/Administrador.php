@@ -1,6 +1,6 @@
 <?php
 
-namespace clases;
+namespace Clases;
 
 class Administrador
 {
@@ -47,5 +47,7 @@ class Administrador
         $this->estado = $estado;
         return $this;
     }
+
+
 
 }

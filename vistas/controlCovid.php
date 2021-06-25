@@ -28,6 +28,7 @@ include_once "vistas/layout/head.php";
 								</div>
 								<div class="card-body">
 						<form id="formControl">
+								
 								   <input type="hidden" id="comprobar">
 								   <input type="hidden" id="codigoActual">
 								    <div class="mb-3 row">
@@ -64,6 +65,8 @@ include_once "vistas/layout/head.php";
 												<input type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Apellidos" readonly>
 											</div>
 										</div>
+						
+									
 								</div>
 							</div>
 							<div class="card">
@@ -96,10 +99,13 @@ include_once "vistas/layout/head.php";
 									<h6 class="card-subtitle text-muted">Completar todo los campos.</h6>
 								</div>
 								<div class="card-body">
+								
+
                                 <input type="hidden" name="dni_paciente" id="dni_paciente">
                                 <input type="hidden" name="nombre_paciente" id="nombre_paciente">
                                 <input type="hidden" name="apellido_paciente" id="apellido_paciente">
                          
+
 									  <input type="hidden" name="accion" value="CONTROL">
 										<div class="mb-3 row">
 											<label class="col-form-label col-sm-2 text-sm-right">Codigo</label>

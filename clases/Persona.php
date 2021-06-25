@@ -1,13 +1,13 @@
 <?php
-
-namespace clases;
-use config\ConexionBD;
-include_once "config/autoload.php";
+namespace Clases;
+use includes\ConexionBD as Conexion;
+include_once "includes/autoload.php";
 class Persona
-{   
+{
     private $id;
     private $nombre;
     private $apellido;
+
 
     public function getId()
     {
@@ -124,6 +124,7 @@ class Persona
                 );
             $stmt = $conn->prepare($sql);
             $stmt->execute($parameter);
+           
       
             $conexionDB->cerrarConexion();
           
@@ -153,10 +154,12 @@ class Persona
             } else {
                 return false;
             }
-                      
+          
+            
         }catch(PDOException $e){
             return $e->getMessage();
         }
  }
+
  
 }

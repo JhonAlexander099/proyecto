@@ -1,9 +1,11 @@
 <?php
 
-namespace controladores;
+namespace Controladores;
 
-use clases\Usuario;
-include_once "config/autoload.php";
+
+use Clases\Usuario;
+include_once "includes/autoload.php";
+
 class ControladorUsuario
 {
     public function login(string $user, string $password)
@@ -17,18 +19,18 @@ class ControladorUsuario
             $datos = $query->fetchAll();
             foreach ($datos as $user) {
                 $passwordBD = $user["clave"];
-                $nombres = $user["nombre"];
+                $nombres = $user["nombres"];
                 $tipo = $user["tipo"];
                 $id = $user['id'];
 
             }
             if (password_verify($password, $passwordBD)) {
-              
+             
                 $_SESSION['user'] = $id;
                 $_SESSION["nombre"] = $nombres;
                 $_SESSION["tipo"] = $tipo;
                 $_SESSION["estado"] = "ok";
-              
+               
                 $msj = 1;
             } else {
                 $msj = "Usuario y/o Contraseña incorrecto";

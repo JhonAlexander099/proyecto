@@ -1,14 +1,15 @@
-<?php
+<?php 
+namespace Controladores;
+use Clases\Control;
+use Clases\Persona;
+use Clases\Historial;
+use Clases\Cuarentena;
+include_once "includes/autoload.php";
 
-namespace controladores;
-use clases\Control;
-use clases\Persona;
-use clases\Historial;
-use clases\Cuarentena;
-include_once "config/autoload.php";
-class ControladorControl
+
+Class ControladorControl 
 {
-    public function controles($datos)
+	public function controles($datos)
 	{
 		$controlPrueba = new Control();
         $objPersona = new Persona();
@@ -25,6 +26,7 @@ class ControladorControl
 			$controlPrueba->setestadiapersona($datos['estadiapersona']);
 			$controlPrueba->setusuario($datos['user']);
 
+			
 			$guardar = $controlPrueba->guardar();
 
 			 $objPersona->settipoDoc($datos['tipoDoc']);
@@ -32,6 +34,7 @@ class ControladorControl
 		 	 $objPersona->setnombres($datos['nombres']);
 		 	 $objPersona->setapellidos($datos['apellidos']);
              
+         
              $existe = $objPersona->buscar();
              $existe = $existe ? true:false;
              if (!$existe) {
@@ -50,11 +53,13 @@ class ControladorControl
              	$id_persona = $persona['id'];
              }
              
+             
              $objHistorial->setcontrol_id($id_control);
              $objHistorial->setpersona_id($id_persona);
              $guardar = $objHistorial->guardar();
 
 		 	 $guardar = $guardar ? true:false;
+             
              
              if($datos['resultado']=='Cuarentena') {  
                $objCuarentena->setControl_id($id_control);
@@ -65,7 +70,7 @@ class ControladorControl
                $guardarCuarentena = $objCuarentena->guardar();
                $guardarCuarentena = $guardarCuarentena ? true:false;
               }
-            
+ 
 		 	 $listar = $objHistorial->listarHistorial();
 
 		 	 if($listar->rowCount()!=0) {

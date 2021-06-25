@@ -1,17 +1,19 @@
 <?php
 
-namespace controladores;
+namespace Controladores;
 
-use clases\Cuarentena;
+use Clases\Cuarentena;
 
 class ControladorCuarentena
 {
+
     function mostrarCuarentena(){
         $guardarCuarentena= new Cuarentena();
         return $guardarCuarentena->mostrarCuarentena();
     }
 
     function ActualizarCuarentena(array $datos){
+
         $a= new Cuarentena();
         $a->setcontrolid($datos['id']);
         $a->setdescripcion($datos['descripcion']);

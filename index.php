@@ -1,10 +1,11 @@
 <?php
 
-use config\ConexionBD;
-use clases\Historial; 
-include_once "config/autoload.php";
+use Includes\ConexionBD;
+use Clases\Historial; 
+include_once "includes/autoload.php";
 
 session_start();
+
 
 $request = $_SERVER['QUERY_STRING'];
 switch ($request) {
@@ -23,21 +24,20 @@ switch ($request) {
         include_once "vistas/registrarPnp.php";
         break;
     case "registrar-control":
-        include_once "vistas/controlCovid.php";
+        include_once "controlCovid.php";
         break;
     case "mostrar-historial":
         include_once "vistas/mostrarHistorial.php";
         break;
     case "mostrar-cuarentena":
-        include_once "vistas/mostrarCuarentena.php";
+        include_once "vistas/mostraruarentena.php";
         break;
     case "mostrar-prueba":
         include_once "vistas/mostrarPrueba.php";
         break;
     
-
     case "login":
-        include_once "vistas/usuarioLogin.php";
+        include_once "vistas/ususarioLogin.php";
         break;
     case 'cerrar':
         session_start();

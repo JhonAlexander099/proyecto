@@ -191,7 +191,7 @@ foreach ($cuarent30 as $k => $cuarentena1) {
 									</thead>
 									<tbody>
 										<?php 
-										// $listar = listar->fetchAll();
+									
                                          foreach ($listar as $k => $value) {
                                          	echo '
                                            <tr>
@@ -233,7 +233,7 @@ foreach ($cuarent30 as $k => $cuarentena1) {
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
 			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
 			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
-			
+			// Line chart
 			new Chart(document.getElementById("chartjs-dashboard-line"), {
 				type: "line",
 				data: {

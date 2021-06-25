@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Clases;
+
+namespace Clases;
+
 
 class PruebaCovid
 {
@@ -64,5 +66,4 @@ class PruebaCovid
         $this->descripcion = $descripcion;
         return $this;
     }
-
 }

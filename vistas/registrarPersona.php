@@ -1,4 +1,5 @@
-<li class="breadcrumb-item"><a href="#">Personas & PNP</a></li>
+lass="breadcrumb bg-transparent p-0 mt-1 mb-0">
+									<li class="breadcrumb-item"><a href="#">Personas & PNP</a></li>
 									<li class="breadcrumb-item"><a href="#">Registro</a></li>
 									<li class="breadcrumb-item active" aria-current="page">Persona</li>
 								</ol>

@@ -1,5 +1,7 @@
 <?php
-namespace clases;
+
+namespace Clases;
+
 class Pnp
 {
     private $nombres;
@@ -62,5 +64,6 @@ class Pnp
         $this->celular = $celular;
         return $this;
     }
+
 
 }

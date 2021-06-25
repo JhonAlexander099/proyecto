@@ -1,6 +1,8 @@
 <?php
 
-namespace clases;
+
+namespace Clases;
+
 
 class Seguimiento
 {

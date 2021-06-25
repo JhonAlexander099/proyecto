@@ -12,6 +12,8 @@
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
 	<title>::SISTEMA CONTROL COVID::</title>
+
+	<link href="recursos/css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
@@ -19,10 +21,11 @@
 	<div class="wrapper">
 
 <?php 
+// para mostrar informacion de acuerdo al tipo de usuario
   if ($_SESSION['tipo']==1) {
-  	include_once 'vistas/layout/admin.php'; 
+  	include_once 'App/vistas/layout/admin.php'; 
   } else {
-  	include_once 'vistas/layout/pnp.php'; 
+  	include_once 'App/vistas/layout/pnp.php'; 
   }
  
 
@@ -126,7 +129,7 @@
 									<a href="#" class="list-group-item">
 										<div class="row g-0 align-items-center">
 											<div class="col-2">
-												<img src="recursos/img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Ruth Salvador">
+												<img src="recursos/img/avatars/avatar-5.jpg" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker">
 											</div>
 											<div class="col-10 pl-2">
 												<div class="text-dark">Vanessa Tucker</div>
@@ -138,7 +141,7 @@
 									<a href="#" class="list-group-item">
 										<div class="row g-0 align-items-center">
 											<div class="col-2">
-												<img src="recursos/img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle" alt="Josep Barrera">
+												<img src="recursos/img/avatars/avatar-2.jpg" class="avatar img-fluid rounded-circle" alt="William Harris">
 											</div>
 											<div class="col-10 pl-2">
 												<div class="text-dark">William Harris</div>
@@ -150,7 +153,7 @@
 									<a href="#" class="list-group-item">
 										<div class="row g-0 align-items-center">
 											<div class="col-2">
-												<img src="recursos/img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle" alt="Goya Salinas">
+												<img src="recursos/img/avatars/avatar-4.jpg" class="avatar img-fluid rounded-circle" alt="Christina Mason">
 											</div>
 											<div class="col-10 pl-2">
 												<div class="text-dark">Christina Mason</div>
@@ -162,7 +165,7 @@
 									<a href="#" class="list-group-item">
 										<div class="row g-0 align-items-center">
 											<div class="col-2">
-												<img src="recursos/img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle" alt="Diana Ventura">
+												<img src="recursos/img/avatars/avatar-3.jpg" class="avatar img-fluid rounded-circle" alt="Sharon Lessman">
 											</div>
 											<div class="col-10 pl-2">
 												<div class="text-dark">Sharon Lessman</div>

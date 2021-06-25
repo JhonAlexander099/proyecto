@@ -1,6 +1,7 @@
-<?php
-include_once "vistas/layout/header.php";
-?>
+<?php 
+ include_once 'vistas/layout/header.php';
+ ?>
+
 <body>
 	<main class="d-flex w-100">
 		<div class="container d-flex flex-column">
@@ -45,6 +46,7 @@ include_once "vistas/layout/header.php";
 									 </form>
 										<div class="text-center mt-3">
 											<a href="#" class="btn btn-lg btn-primary" onclick="iniciar()">Iniciar</a><br><br>
+											
 										</div>
 										<div id="error"></div>
 									
@@ -85,4 +87,3 @@ include_once "vistas/layout/header.php";
 </body>
 
 </html>
-

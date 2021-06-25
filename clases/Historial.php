@@ -1,7 +1,9 @@
 <?php
-namespace clases;
-use config\ConexionBD;
-include_once "config/autoload.php";
+
+
+namespace Clases;
+use includes\ConexionBD as Conexion;
+include_once "includes/autoload.php";
 
 class Historial
 {
@@ -9,6 +11,8 @@ class Historial
     private $persona_id;
     private $numHistorial;
     private $dni_paciente;
+
+
 
     public function getcontrol_id()
     {
@@ -76,6 +80,7 @@ class Historial
         }
     }
 
+
     public function guardar()
     {
         try{
@@ -114,6 +119,7 @@ class Historial
                 );
             $stmt = $conn->prepare($sql);
             $stmt->execute($parameter);
+           
       
             $conexionDB->cerrarConexion();
           
@@ -136,6 +142,7 @@ class Historial
                 );
             $stmt = $conn->prepare($sql);
             $stmt->execute($parameter);
+          
       
             $conexionDB->cerrarConexion();
           
@@ -161,6 +168,7 @@ class Historial
                 );
             $stmt = $conn->prepare($sql);
             $stmt->execute($parameter);
+           
       
             $conexionDB->cerrarConexion();
           
@@ -183,6 +191,7 @@ class Historial
 
             $stmt = $conn->prepare($sql);
             $stmt->execute($parameter);
+
       
             $conexionDB->cerrarConexion();
           
@@ -209,6 +218,7 @@ class Historial
 
             $stmt = $conn->prepare($sql);
             $stmt->execute();
+     
       
             $conexionDB->cerrarConexion();
           
@@ -218,5 +228,7 @@ class Historial
             return $e->getMessage();
         }
     }
+
+
 
 }
