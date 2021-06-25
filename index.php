@@ -1,36 +1,65 @@
 <?php
 
-use controladores\ControladorUsuario;
+use config\ConexionBD;
+use clases\Historial; 
+include_once "config/autoload.php";
 
-require_once "config/autoload.php";
-require_once "vistas/layout/header.php";
-?>
-    <div class="container">
-        <a href="usuarioCrear.php">Registrate</a>
+session_start();
 
-        <?= (isset($_GET["s"]) ? "Usuario Creado" : "") ?>
-        <div class="text-center">
-            <h1>Login</h1>
-        </div>
-        <div class="d-flex justify-content-center">
-            <form method="post" action="<?= $_SERVER["PHP_SELF"] ?>">
-                <div class="mb-2">
-                    <input class="form-control" type="text" name="username" placeholder="Ingrese Usuario">
-                </div>
-                <div class="mb-2">
-                    <input class="form-control" type="password" name="password" placeholder="Ingrese Contraseña">
-                </div>
-                <div class="text-center d-grid gap-2">
-                    <input class="btn btn-primary" type="submit" name="submit" value="Ingresar">
-                </div>
-            </form>
-        </div>
-    </div>
-<?php
-if (!empty($_POST)) {
-    $username = trim($_POST["username"]);
-    $password = trim($_POST["password"]);
-    $controladorUsuario = new ControladorUsuario();
-    $controladorUsuario->login($username, $password);
+$request = $_SERVER['QUERY_STRING'];
+switch ($request) {
+    
+    case "bienvenido":
+       $objHistorial = new Historial();
+        include_once "vistas/bienvenido.php";
+        break;
+    case "crear-usuarios":
+        include_once "vistas/usuarioCrear.php";
+        break;
+    case "registrar-personas":
+        include_once "vistas/registrarPersona.php";
+        break;
+    case "registrar-pnp":
+        include_once "vistas/registrarPnp.php";
+        break;
+    case "registrar-control":
+        include_once "vistas/controlCovid.php";
+        break;
+    case "mostrar-historial":
+        include_once "vistas/mostrarHistorial.php";
+        break;
+    case "mostrar-cuarentena":
+        include_once "vistas/mostrarCuarentena.php";
+        break;
+    case "mostrar-prueba":
+        include_once "vistas/mostrarPrueba.php";
+        break;
+    
+
+    case "login":
+        include_once "vistas/usuarioLogin.php";
+        break;
+    case 'cerrar':
+        session_start();
+        session_destroy();
+        header('location: cerrado');
+        break;
+    case "guardar-usuario":
+        include_once "vistas/usuarioCrear.php";
+        break;
+    case "validar":
+        $codigo = $_POST["correo"];
+        $controladorUsuario = new ControladorUsuario();
+        $controladorUsuario->validar($codigo);
+        break;
+    case "api/personas":
+          
+        break;
+
+    default:
+
+        include_once "vistas/usuarioLogin.php";
+        
+        break;
+
 }
-require_once "vistas/layout/footer.php";

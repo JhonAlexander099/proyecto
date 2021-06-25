@@ -1,30 +1,86 @@
 <?php
 
 namespace controladores;
+
 use clases\Usuario;
-require_once "config/autoload.php";
+include_once "config/autoload.php";
 class ControladorUsuario
 {
-    public function login($username, $password){
-        $usuario = new Usuario($username, $password);
-
-                session_start();
-                $_SESSION["usuario"] = $username;
-                
-                $_SESSION["tipo"] = "dispensador";
-                header("location: bienvenido.php");
-
-}
-
-    public function guardar($username, $password)
+    public function login(string $user, string $password)
     {
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        $usuario = new Usuario($username, $password);
-        if ($usuario->crear() != 0) {
-            header("location: index.php?s");
+        $usuario = new Usuario();
+        $usuario ->setUser($user);
+        $query = $usuario->mostrarPorUsuario();
+        if ($query->rowCount() != 1) {
+            $msj = "Usuario incorrecto";
         } else {
-            header("location: usuarioCrear.php?s");
+            $datos = $query->fetchAll();
+            foreach ($datos as $user) {
+                $passwordBD = $user["clave"];
+                $nombres = $user["nombre"];
+                $tipo = $user["tipo"];
+                $id = $user['id'];
+
+            }
+            if (password_verify($password, $passwordBD)) {
+              
+                $_SESSION['user'] = $id;
+                $_SESSION["nombre"] = $nombres;
+                $_SESSION["tipo"] = $tipo;
+                $_SESSION["estado"] = "ok";
+              
+                $msj = 1;
+            } else {
+                $msj = "Usuario y/o Contraseña incorrecto";
+            }
+        }
+        return $msj;
+    }
+
+    public function CrearUsuario(string $nombre, string $user, string $clave, int $tipo) {
+        
+        $mensaje = "";
+
+        if (!$this->validarCadena($nombre)) {
+            $mensaje .= "Caracteres no admitidos en Nombres<br>";
         }
 
-    }   
+        if (!$this->validarCorreo($user)) {
+            $mensaje .= "El correo no cumple con el formato establecido<br>";
+        }
+         
+         if (strlen($mensaje) == 0) {
+         
+         $objUser = new Usuario();
+          $objUser->setNombres($nombre);
+          $objUser->setUser($user);
+          $claveHash = password_hash($clave, PASSWORD_BCRYPT);
+          $objUser->setClave($claveHash);
+          $objUser->setTipo($tipo);
+
+          $guardar = $objUser->crear();
+          $guardar = $guardar ? true : false;
+          if ($guardar) {
+             $mensaje = 'Se guardó';
+          } else {
+            $mensaje = 'No se pudo guardar';
+          }
+       }
+
+          return $mensaje;
+    }
+
+    public function validarCadena($cadena)
+    {
+        $valores = null;
+        preg_match("/[a-zA-Z ]+/", $cadena, $valores);
+        $validacion = (strlen($cadena) == strlen($valores[0])) ? true : false;
+        return $validacion;
+    }
+    public function validarCorreo($cadena)
+    {
+      $valores = null;
+      return (1 === preg_match('/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/', $cadena, $valores)) ? true : false;
+    }
+
 }

@@ -1,1 +1,0 @@
-<h1>404<br>Pagina no encontrada</h1>

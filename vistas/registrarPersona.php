@@ -62,5 +62,5 @@
 			</div>
 </main>
 <?php 
-include_once "app/vistas/layout/footer.php";
+include_once "vistas/layout/footer.php";
  ?>

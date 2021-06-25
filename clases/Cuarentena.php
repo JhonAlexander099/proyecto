@@ -5,31 +5,31 @@ use config\ConexionBD;
 include_once "config/autoload.php";
 class Cuarentena
 {
-    private $fecha_inicio;
-    private $fecha_final;
+    private $fechaInicio;
+    private $fechaFinal;
     private $descripcion;
     private $control_id;
 
-
-    public function getFecha_inicio()
+   
+    public function getFechaInicio()
     {
-        return $this->fecha_inicio;
+        return $this->fechaInicio;
     }
 
-    public function setFecha_inicio($fecha_inicio)
+    public function setFechaInicio($fechaInicio)
     {
-        return $this->fecha_inicio = $fecha_inicio;
+        return $this->fechaInicio = $fechaInicio;
         
     }
 
-    public function getFecha_final()
+    public function getFechaFinal()
     {
-        return $this->fecha_final;
+        return $this->fechaFinal;
     }
 
-    public function setFecha_final($fecha_Final)
+    public function setFechaFinal($fechaFinal)
     {
-        return $this->fecha_final = $fecha_Final;
+        return $this->fechaFinal = $fechaFinal;
         
     }
 
@@ -52,20 +52,67 @@ class Cuarentena
     {
         return $this->control_id = $control_id;
     }
-
-    public function crear()
+    
+    public function guardar()
     {
         try{
             $conexionDB = new Conexion();
             $conn = $conexionDB->abrirConexion();
             $sql = "INSERT INTO cuarentena(fecha_inicio,fecha_final,descripcion,control_id)
-                    VALUES('$this->fecha_inicio','$this->fecha_final','$this->descripcion','$this->control_id')";
-            $resultado = $cnx->exec($sql);
-            $conexion->cerrar();
-            return $resultado;
-            }catch(\PDOException $e){
-            echo $e->getMessage();
+                    VALUES(?,?,?,?)";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $this->fechaInicio, \PDO::PARAM_STR);
+            $stmt->bindParam(2, $this->fechaFinal, \PDO::PARAM_STR);
+            $stmt->bindParam(3, $this->descripcion, \PDO::PARAM_STR);
+            $stmt->bindParam(4, $this->control_id, \PDO::PARAM_INT);
+            $stmt->execute();
+            $filas = $stmt->rowCount();
+
+            $conexionDB->cerrarConexion();
+            if ($filas!=0) {
+              return true;    
+            } else {
+                return false;
             }
+            
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function mostrarCuarentena(){
+        $Conexion = new Conexion();
+        $conn = $Conexion->abrirConexion();
+
+        $sql = "SELECT c.codigo, p.nombres, p.apellidos, cu.fecha_inicio, cu.fecha_final FROM cuarentena AS cu 
+					JOIN control AS c ON cu.control_id = c.id
+                    JOIN historial AS h ON h.control_id = c.id
+                    JOIN persona AS p ON p.id = h.persona_id";
+
+        return $conn->query($sql);
+    }
+
+    public function ActualizarCuarentena(){
+
+        $Conexion = new Conexion();
+        $conn = $Conexion->abrirConexion();
+
+        $sql = "UPDATE cuarentena SET ". "descripcion='" . $this->descripcion ."'"
+            . " WHERE id='" . $this->id."'";
+        $conn->query($sql);
+        $Conexion->CerrarConexion();
+    }
+
+    public function BuscarIdC($id){
+        $Conexion = new Conexion();
+        $conn = $Conexion->abrirConexion();
+        $sql = "SELECT cu.id, p.nombres, p.apellidos, cu.fecha_inicio, cu.fecha_final, cu.descripcion FROM cuarentena AS cu 
+					JOIN control AS c ON cu.control_id = c.id
+                    JOIN historial AS h ON h.control_id = c.id
+                    JOIN persona AS p ON p.id = h.persona_id WHERE cu.id='" . $id."'";
+        return $conn->query($sql);
+
     }
 
 }

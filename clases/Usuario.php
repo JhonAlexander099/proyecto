@@ -84,7 +84,7 @@ class Usuario{
             echo $e->getMessage();
         }
     }
-/*
+
     public function mostrarPorUsuario()
     {
         try {
@@ -96,28 +96,12 @@ class Usuario{
             $stmt->bindParam(1, $this->user, \PDO::PARAM_STR);
 
             $stmt->execute();
-            //$resultado = $stmt->fetchAll();
 
             $conexionDB->cerrarConexion();
             
             return $stmt;
         } catch (Exception $e) {
             return $e->getMessage();
-        }
-    }
-*/
-    public function existe(){
-        {
-            try {
-                $conexion = new ConexionBD();
-                $cnx = $conexion->getConexion();
-                $sql = "SELECT password FROM usuario WHERE nombres='$this->nombres';";
-                $resultado = $cnx->query($sql);
-                $conexion->cerrar();
-                return $resultado;
-            }catch (\PDOException $e){
-                echo $e->getMessage();
-            }
         }
     }
 

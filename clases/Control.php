@@ -5,121 +5,314 @@ use config\ConexionBD;
 include_once "config/autoload.php";
 class Control
 {
-    private $id;
     private $codigo;
-    private $numDocPrueba;
-    private $tipoPrueba;
-    private $medioTransporte;
+    private $docprueba;
+    private $tipoprueba;
+    private $fechaprueba;
+    private $fechareg;
+    private $mtransporte;
     private $resultado;
-    private $estadia;
+    private $estadiapersona;
+    private $usuario_id;
+    private $dni_paciente;
+    private $nombres_paciente;
+    private $apellidos_paciente;
+    private $idPersona;
+    private $idControl;
 
-    public function getId()
+    public function getIdPersona()
     {
-        return $this->id;
+        return $this->idPersona;
     }
 
-    public function setId($id)
+    public function setIdPersona(string $idPersona)
     {
-        $this->id = $id;
-        return $this;
+        return $this->idPersona = $idPersona;
     }
+
+    public function getIdControl()
+    {
+        return $this->idControl;
+    }
+
+    public function setIdControl(string $idControl)
+    {
+        return $this->idControl = $idControl;
+    }
+
+    public function getDniPaciente()
+    {
+        return $this->dni_paciente;
+    }
+
+    public function setDniPaciente(string $dni_paciente)
+    {
+        return $this->dni_paciente = $dni_paciente;
+    }
+
+    public function getNombrePaciente()
+    {
+        return $this->nombres_paciente;
+    }
+
+    public function setNombrePaciente(string $nombre_paciente)
+    {
+        return $this->nombres_paciente = $nombre_paciente;
+    }
+
+    public function getApellidosPaciente()
+    {
+        return $this->apellidos_paciente;
+    }
+
+    public function setApellidosPaciente(string $apellidos_paciente)
+    {
+        return $this->apellidos_paciente = $apellidos_paciente;
+    }
+
+
+
     public function getCodigo()
     {
         return $this->codigo;
     }
 
-    public function setCodigo($codigo)
+    public function setCodigo(int $codigo)
     {
-        $this->codigo = $codigo;
-        return $this;
+        return $this->codigo = $codigo;
     }
-    public function getNumDocPrueba()
+    public function getdocprueba()
     {
-        return $this->codigo;
-    }
-
-    public function setNumDocPrueba($numDocPrueba)
-    {
-        $this->numDocPrueba = $numDocPrueba;
-        return $this;
-    }
-    public function getTipoPrueba()
-    {
-        return $this->tipoPrueba;
+        return $this->docprueba;
     }
 
-    public function setTipoPrueba($tipoPrueba)
+    public function setdocprueba(string $docprueba)
     {
-        $this->tipoPrueba = $tipoPrueba;
-        return $this;
+        return $this->docprueba = $docprueba;
+        
     }
-    public function getMedioTransporte()
+    public function gettipoprueba()
     {
-        return $this->medioTransporte;
-    }
-
-    public function setMedioTransporte($medioTransporte)
-    {
-        $this->medioTransporte = $medioTransporte;
-        return $this;
-    }
-    public function getResultado()
-    {
-        return $this->Resultado;
+        return $this->tipoprueba;
     }
 
-    public function setResultado($resultado)
+    public function settipoprueba(string $tipoprueba)
     {
-        $this->resultado = $resultado;
-        return $this;
-    }
-    public function getEstadia()
-    {
-        return $this->estadia;
+        return $this->tipoprueba = $tipoprueba;
+        
     }
 
-    public function setEstadia($estadia)
+
+    public function getfechaprueba()
     {
-        $this->estadia = $estadia;
-        return $this;
+        return $this->fechaprueba;
     }
 
-    public function guardar(){
+    public function setfechaprueba(string $fechaprueba)
+    {
+        return $this->fechaprueba = $fechaprueba;
+        
+    }
+
+    public function getfechareg()
+    {
+        return $this->fechareg;
+    }
+
+    public function setfechareg(string $fechareg)
+    {
+        return $this->fechareg = $fechareg;
+        
+    }
+
+    public function getmtransporte()
+    {
+        return $this->mtransporte;
+    }
+
+    public function setmtransporte(string $mtransporte)
+    {
+        return $this->mtransporte = $mtransporte;
+        
+    }
+
+    public function getresultado()
+    {
+        return $this->resultado;
+    }
+
+    public function setresultado(string $resultado)
+    {
+        return $this->resultado = $resultado;
+        
+    }
+
+    public function getestadiapersona()
+    {
+        return $this->estadiapersona;
+    }
+
+
+    public function setestadiapersona(string $estadiapersona)
+    {
+        return $this->estadiapersona = $estadiapersona;
+        
+    }
+    public function getusuario() 
+    {
+        return $this->usuario_id;
+    }
+    public function setusuario(int $usuario_id)
+    {
+        return $this->usuario_id = $usuario_id;
+    }
+
+    public function guardar() {
         try{
-            $conexion = new ConexionDB();
-            $cnx = $conexion->getConexion();
-            $sql = "INSERT INTO control(codigo,numDocPrueba,tipoPrueba,tipoPrueba,
-            medioTransporte,resultado,estadia)
-            VALUES ('$this->codigo','$this->numDocPrueba','$this->tipoPrueba',
-            '$this->medioTransporte','$this->resultado','$this->estadia')";
-            $resultado = $cnx->exec($sql);
-            $conexion->cerrar();
-            return $resultado;
-        }catch (\PDOException $e){
-            echo $e->getMessage();
-    }
-   
-    }/*
-    public function actualizar(){
-        try{
-            $objConexion = new ConexionDB();
-            $conexion = $objConexion->abrir();
-            $query = "UPDATE control SET codigo='$this->codigo',numDocPrueba='$this->numDocPrueba',
-            tipoPrueba='$this->tipoPrueba',tipoPrueba='$this->tipoPrueba',medioTransporte='$this->medioTransporte',
-            resultado='$this->resultado',estadia='$this->estadia'
-            WHERE id=$this->id";
-            $resultado = $conexion->exec($query);
-            $objConexion->cerrar();
-        }catch (\PDOException $e){
-            echo "Error: ".$e->getMessage();
-            exit();
+            $conexionDB = new Conexion();
+            $conn = $conexionDB->abrirConexion();
+            $sql = "INSERT INTO control(codigo,docprueba,tipoprueba,fechaprueba,fechareg,mtransporte,resultado,estadiapersona,usuario_id)
+                    VALUES(?,?,?,?,?,?,?,?,?)";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $this->codigo, \PDO::PARAM_INT);
+            $stmt->bindParam(2, $this->docprueba, \PDO::PARAM_STR);
+            $stmt->bindParam(3, $this->tipoprueba, \PDO::PARAM_STR);
+            $stmt->bindParam(4, $this->fechaprueba, \PDO::PARAM_STR);
+            $stmt->bindParam(5, $this->fechareg, \PDO::PARAM_STR);
+            $stmt->bindParam(6, $this->mtransporte, \PDO::PARAM_STR);
+            $stmt->bindParam(7, $this->resultado, \PDO::PARAM_STR);
+            $stmt->bindParam(8, $this->estadiapersona, \PDO::PARAM_STR);
+            $stmt->bindParam(9, $this->usuario_id, \PDO::PARAM_INT);
+            $stmt->execute();
+            $filas = $stmt->rowCount();
+
+            $conexionDB->cerrarConexion();
+            if ($filas!=0) {
+              return true;    
+            } else {
+                return false;
+            }
+            
+        }catch(PDOException $e){
+            return $e->getMessage();
         }
-        return $resultado;
-    }*/
+    }
+
+    public function controlID()
+    {
+        try{
+            $conexionDB = new Conexion();
+            $conn = $conexionDB->abrirConexion();
+            $sql = "SELECT id from control where codigo=:codigo ";
+            
+            $parameter = array(
+                    ':codigo'=>$this->codigo
+                );
+            $stmt = $conn->prepare($sql);
+            $stmt->execute($parameter);
+           
+      
+            $conexionDB->cerrarConexion();
+          
+          return $stmt;      
+            
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+ 
+    public function obtenerDatosPacientePorDni() {
+        try{
+            $conexionDB = new Conexion();
+            $conn = $conexionDB->abrirConexion();
+            $sql = "SELECT * FROM persona WHERE documento = ?";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $this->dni_paciente, \PDO::PARAM_STR);
+            if($stmt->execute()){
+                return $stmt->fetch();
+            }else{
+                return false;
+            }
+
+            $conexionDB->cerrarConexion();
+
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function obtenerDatosDeControlPorUsuarioLogueado() {
+        try{
+            $conexionDB = new Conexion();
+            $conn = $conexionDB->abrirConexion();
+            $sql = "SELECT id FROM control WHERE usuario_id = ? ORDER BY id DESC LIMIT 1";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $this->usuario_id, \PDO::PARAM_INT);
+            if($stmt->execute()){
+                return $stmt->fetch();
+            }else{
+                return false;
+            }
+
+            $conexionDB->cerrarConexion();
+
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function registrarNuevoPaciente() {
+        try{
+            $conexionDB = new Conexion();
+            $conn = $conexionDB->abrirConexion();
+            $sql = "INSERT INTO persona(documento,nombres,apellidos)
+                    VALUES(?,?,?)";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $this->dni_paciente, \PDO::PARAM_STR);
+            $stmt->bindParam(2, $this->nombres_paciente, \PDO::PARAM_STR);
+            $stmt->bindParam(3, $this->apellidos_paciente, \PDO::PARAM_STR);
+            $stmt->execute();
+            $filas = $stmt->rowCount();
+
+            $conexionDB->cerrarConexion();
+            if ($filas!=0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function guardarHistorialClinico() {
+        try{
+            $conexionDB = new Conexion();
+            $conn = $conexionDB->abrirConexion();
+            $sql = "INSERT INTO historial(control_id,persona_id)
+                    VALUES(?,?)";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $this->idControl, \PDO::PARAM_INT);
+            $stmt->bindParam(2, $this->idPersona, \PDO::PARAM_INT);
+            $stmt->execute();
+            $filas = $stmt->rowCount();
+
+            $conexionDB->cerrarConexion();
+            if ($filas!=0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+    }
+    
 }
-
-
-
-
-
-

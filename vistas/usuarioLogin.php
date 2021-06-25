@@ -1,29 +1,88 @@
 <?php
-use controladores\ControladorUsuario;
-include_once "config/autoload.php";
 include_once "vistas/layout/header.php";
-session_start();
-session_destroy();
 ?>
-<div class="position-absolute top-50 start-50 translate-middle">
-<h1 class="h3 mb-3 fw-normal">Ingrese sus datos</h1> 
-<form method="post" action="?login">
-    <input class='form-control mb-2' type="text" name="user" placeholder="Correo">
-    <input class='form-control' type="password" name="pass" placeholder="Contraseña">
-    <div class="mt-2 mx-5">
-        <a href="?registrar-usuario">registrar usuario</a>
-    </div>
-    <input class='w-100 btn btn-lg btn-primary mt-3' type="submit" name="submit" value="Login">
-</form>
-</div>
-<?php
-if(!empty($_POST)){
-    $user = htmlentities(trim($_POST["user"]));
-    $pass = htmlentities(trim($_POST["pass"]));
+<body>
+	<main class="d-flex w-100">
+		<div class="container d-flex flex-column">
+			<div class="row vh-100">
+				<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+					<div class="d-table-cell align-middle">
 
-    
-    $controladorUsuario = new ControladorUsuario();
-    $controladorUsuario->login($user, $pass);
-}
-include_once "vistas/layout/footer.php";
+						<div class="text-center mt-4">
+							<h1 class="h2">Bienvenidos al sistema</h1>
+							<p class="lead">
+								Para controlar personas en el transporte del covid 19!
+							</p>
+						</div>
+
+						<div class="card">
+							<div class="card-body">
+								<div class="m-sm-4">
+									<div class="text-center">
+										<img src="recursos/img/avatars/avatar.jpg" alt="Charles Hall" class="img-fluid rounded-circle" width="132" height="132" />
+									</div>
+									<form id="formUser">
+									 <input type="hidden" name="accion" value="LOGIN">
+										<div class="mb-3">
+											<label class="form-label">Email</label>
+											<input class="form-control form-control-lg" type="email" name="email" placeholder="Escriba su correo" />
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Password</label>
+											<input class="form-control form-control-lg" type="password" name="password" placeholder="Escriba su contraseña" />
+											<small>
+								            <a href="#">Se olvidó su contraseña?</a>
+								          </small>
+										</div>
+										<div>
+											<label class="form-check">
+									            <input class="form-check-input" type="checkbox" value="remember-me" name="remember-me" checked>
+									            <span class="form-check-label">
+									              Recordarme
+									            </span>
+									          </label>
+										</div>
+									 </form>
+										<div class="text-center mt-3">
+											<a href="#" class="btn btn-lg btn-primary" onclick="iniciar()">Iniciar</a><br><br>
+										</div>
+										<div id="error"></div>
+									
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="recursos/js/app.js"></script>
+	<script>
+		function iniciar() {
+             var datos = $('#formUser').serializeArray();
+             $.ajax({
+             	method: 'POST',
+             	url: 'ajax.php',
+             	data: datos
+             })
+             .done(function(html){
+             	console.log(html);
+             	if (html==1) {
+                  location.href='bienvenido';
+             	} else {
+             	   	  $('#error').html(html);	
+             	}
+             	
+             	
+             })
+		}
+	</script>
+
+</body>
+
+</html>
 

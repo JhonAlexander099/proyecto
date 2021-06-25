@@ -1,7 +1,5 @@
 <?php
 namespace clases;
-use config\ConexionBD;
-include_once "config/autoload.php";
 class Pnp
 {
     private $nombres;
@@ -10,7 +8,6 @@ class Pnp
     private $correo;
     private $celular;
 
-    
     public function getNombres()
     {
         return $this->nombres;

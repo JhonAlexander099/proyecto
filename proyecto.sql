@@ -109,6 +109,7 @@ ALTER TABLE `cuarentena`
 
 --
 -- Indices de la tabla `historial`
+
 --
 ALTER TABLE `historial`
   ADD PRIMARY KEY (`id`),

@@ -1,23 +1,27 @@
 <?php
 
-
 namespace controladores;
-
 
 use clases\Cuarentena;
 
 class ControladorCuarentena
 {
-    public function guardar($fecha)
-    {
-        $id = $_SESSION["id"];
-        $cuarentena = new Cuarentena($fecha, $id);
-        $idCuarentena = $cuarentena->crear();
-        if ($idCuarentena != 0) {
-            header ("location: CuarentenaCrear.php?id=$idCuarentena");
-        } else {
-            return "No se guardó";
-        }
+    function mostrarCuarentena(){
+        $guardarCuarentena= new Cuarentena();
+        return $guardarCuarentena->mostrarCuarentena();
+    }
+
+    function ActualizarCuarentena(array $datos){
+        $a= new Cuarentena();
+        $a->setcontrolid($datos['id']);
+        $a->setdescripcion($datos['descripcion']);
+        $a->ActualizarCuarentena();
 
     }
+
+    function BuscarIdC($id){
+        $vehi= new Cuarentena();
+        return $vehi->BuscarIdC($id);
+    }
+
 }

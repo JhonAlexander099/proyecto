@@ -1,13 +1,19 @@
 <?php
 
 namespace clases;
-use config\ConexionBD;
-include_once "config/autoload.php";
+
 class Administrador
 {
     private $codigo;
     private $nombres;
     private $estado;
+
+    public function __construct($codigo, $nombres, $estado)
+    {
+        $this->codigo = $codigo;
+        $this->nombres = $nombres;
+        $this->estado = $estado;
+    }
 
     public function getCodigo()
     {
